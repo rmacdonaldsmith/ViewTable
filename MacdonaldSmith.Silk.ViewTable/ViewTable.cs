@@ -62,12 +62,12 @@ namespace MacdonaldSmith.Silk.ViewTable
 		    }
 		}
 
-	    public void AddColumnInt32(string columnName)
+	    public void AddInt32Column(string columnName)
 	    {
-	        AddColumnInt32(columnName, 0);
+	        AddInt32Column(columnName, 0);
 	    }
 
-	    public void AddColumnInt32(string columnName, Int32 defaultValue)
+	    public void AddInt32Column(string columnName, Int32 defaultValue)
 	    {
             _columnNames.Add(columnName);
 
@@ -81,12 +81,12 @@ namespace MacdonaldSmith.Silk.ViewTable
 	        _int32Values.Add(_columnNames.Count - 1, columnValues);
 	    }
 
-	    public void AddColumnString(string columnName)
+	    public void AddStringColumn(string columnName)
 	    {
-	        AddColumnString(columnName, string.Empty);
+	        AddStringColumn(columnName, string.Empty);
 	    }
 
-	    public void AddColumnString(string columnName, string defaultValue)
+	    public void AddStringColumn(string columnName, string defaultValue)
 	    {
             _columnNames.Add(columnName);
 

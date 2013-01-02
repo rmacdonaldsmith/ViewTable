@@ -9,13 +9,13 @@ namespace MacdonaldSmith.Silk.ViewTable
 
         void ReSize(int rowCount);
 
-	    void AddColumnInt32(string columnName);
+	    void AddInt32Column(string columnName);
 
-	    void AddColumnInt32(string columnName, Int32 defaultValue);
+	    void AddInt32Column(string columnName, Int32 defaultValue);
 
-        void AddColumnString(string columnName);
+        void AddStringColumn(string columnName);
 
-        void AddColumnString(string columnName, String defaultValue);
+        void AddStringColumn(string columnName, String defaultValue);
 
 		void UpdateInt32 (int rowIndex, int columnIndex, Int32 value);
 

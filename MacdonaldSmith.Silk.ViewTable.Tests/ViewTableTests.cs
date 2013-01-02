@@ -10,7 +10,7 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests
         {
             string columnName = "string column";
             IViewTable viewTable = new ViewTable(1);
-            viewTable.AddColumnString(columnName, "default");
+            viewTable.AddStringColumn(columnName, "default");
 
             Assert.AreEqual(1, viewTable.ColumnCount);
             Assert.AreEqual(1, viewTable.RowCount);
