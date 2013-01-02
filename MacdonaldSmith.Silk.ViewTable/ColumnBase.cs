@@ -1,8 +1,8 @@
 using System;
 namespace MacdonaldSmith.Silk.ViewTable
 {
-	public abstract class ColumnBase
-	{
+    public abstract class ColumnBase<T>
+    {
 		protected readonly string _columnName;
 		protected int _rowCount;
 
@@ -28,7 +28,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public abstract void ReSize(int rowCount);
 
-        public abstract T GetValue<T>(int rowIndex);
+        public abstract T GetValue(int rowIndex);
 	}
 	
     //public class StringColumn : ColumnBase

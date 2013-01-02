@@ -5,21 +5,33 @@ namespace MacdonaldSmith.Silk.ViewTable
 	{
 		void Clear();
 
-	    void AddColumn<T>(string columnName);
+        void DeleteColumn(string columnName);
 
-	    void AddColumn<T>(string columnName, T defaultValue);
-		
-		void DeleteColumn(string columnName);
-		
-		void ReSize(int rowCount);
-		
-		void Update<T> (int rowIndex, int columnIndex, T value);
-		
-		void Update<T> (int rowIndex, string colName, T value);
+        void ReSize(int rowCount);
 
-	    T GetValue<T>(int rowIndex, string columnName);
+	    void AddColumnInt32(string columnName);
 
-	    T GetValue<T>(int rowIndex, int columnIndex);
+	    void AddColumnInt32(string columnName, Int32 defaultValue);
+
+        void AddColumnString(string columnName);
+
+        void AddColumnString(string columnName, String defaultValue);
+
+		void UpdateInt32 (int rowIndex, int columnIndex, Int32 value);
+
+        void UpdateInt32(int rowIndex, string columnName, Int32 value);
+
+        void UpdateString(int rowIndex, int columnIndex, string value);
+
+        void UpdateString(int rowIndex, string columnName, string value);
+
+        Int32 GetValueInt32(int rowIndex, string columnName);
+
+        Int32 GetValueInt32(int rowIndex, int columnIndex);
+
+        string GetValueString(int rowIndex, string columnName);
+
+        string GetValueString(int rowIndex, int columnIndex);
 
 		void Commit();
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace MacdonaldSmith.Silk.ViewTable.Tests
 {
@@ -14,15 +10,15 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests
         {
             string columnName = "string column";
             IViewTable viewTable = new ViewTable(1);
-            viewTable.AddColumn<string>("column name", "default");
+            viewTable.AddColumnString(columnName, "default");
 
             Assert.AreEqual(1, viewTable.ColumnCount);
             Assert.AreEqual(1, viewTable.RowCount);
-            Assert.AreEqual("default", viewTable.GetValue<string>(0, columnName));
+            Assert.AreEqual("default", viewTable.GetValueString(0, columnName));
 
-            viewTable.Update(0, columnName, "new string value");
+            viewTable.UpdateString(0, columnName, "new string value");
 
-            Assert.AreEqual("new string value", viewTable.GetValue<string>(0, columnName));
+            Assert.AreEqual("new string value", viewTable.GetValueString(0, columnName));
         }
     }
 }

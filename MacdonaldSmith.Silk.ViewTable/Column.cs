@@ -37,7 +37,7 @@ namespace MacdonaldSmith.Silk.ViewTable
             _values[rowIndex] = value;
         }
 
-        public override T GetValue<T>(int rowIndex)
+        public T GetValue(int rowIndex)
         {
             return _values[rowIndex];
         }
