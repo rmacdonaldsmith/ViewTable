@@ -33,7 +33,8 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ViewTable", "In order to aggregate data for use in a UI grid\r\nAs a lazy developer\r\nI want to b" +
-                    "e able to build a view table of various data types", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "e able to build a view table to aggregate data of various data types from variou" +
+                    "s sources", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,22 +67,37 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a view table")]
-        public virtual void CreateAViewTable()
+        [NUnit.Framework.DescriptionAttribute("Update")]
+        public virtual void Update()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a view table", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ColumnName",
+                        "DataType",
+                        "Value"});
+            table1.AddRow(new string[] {
+                        "Name",
+                        "string",
+                        "Robert"});
+            table1.AddRow(new string[] {
+                        "Number of Records",
+                        "Int32",
+                        "12"});
+            table1.AddRow(new string[] {
+                        "DoB",
+                        "DateTime",
+                        "03/05/1973"});
 #line 7
- testRunner.Given("I have a ViewTable with the following columns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 8
- testRunner.When("I add a string column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
- testRunner.And("I add an Int32 column", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
- testRunner.And("I update the string column with the value \"new string value\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.Then("I the value of the string column at row index 0 should be \"new string value\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I have a table with the following initial state", ((string)(null)), table1, "Given ");
+#line 12
+ testRunner.When("I update the column \"Name\" with the value \"John\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 13
+ testRunner.And("I commit the changes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 14
+ testRunner.Then("I receive an event with the changes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

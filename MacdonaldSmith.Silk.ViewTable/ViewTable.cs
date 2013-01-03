@@ -100,6 +100,25 @@ namespace MacdonaldSmith.Silk.ViewTable
             _stringValues.Add(_columnNames.Count - 1, columnValues);
 	    }
 
+        public void AddDateTimeColumn(string columnName)
+        {
+            AddDateTimeColumn(columnName, DateTime.MinValue);
+        }
+
+        public void AddDateTimeColumn(string columnName, DateTime defaultValue)
+        {
+            _columnNames.Add(columnName);
+
+            var columnValues = new DateTime[_rowCount];
+
+            for (int index = 0; index < columnValues.Length; index++)
+            {
+                columnValues[index] = defaultValue;
+            }
+
+            _dateTimeValues.Add(_columnNames.Count - 1, columnValues);
+        }
+
 	    public void DeleteColumn(string columnName)
 	    {
 	        throw new NotImplementedException();
@@ -163,6 +182,33 @@ namespace MacdonaldSmith.Silk.ViewTable
             //update the bit mask column to indicate that this row is dirty
             _bitMaskColumn[rowIndex] = 1;
 	    }
+
+	    public void UpdateDateTime(int rowIndex, int columnIndex, DateTime dateTime)
+	    {
+            CheckRowIndex(rowIndex);
+
+            CheckColumnIndex(columnIndex);
+
+            _dateTimeValues[columnIndex][rowIndex] = dateTime;
+
+            //update the bit mask column to indicate that this row is dirty
+            _bitMaskColumn[rowIndex] = 1;
+	    }
+
+	    public void UpdateDateTime(int rowIndex, string columnName, DateTime dateTime)
+        {
+            CheckRowIndex(rowIndex);
+
+            int columnIndex;
+            if (TryGetColumnIndex(columnName, out columnIndex) == false)
+            {
+                throw new ArgumentException(string.Format("No column exists with the name '{0}'", columnName));
+            }
+
+            _dateTimeValues[columnIndex][rowIndex] = dateTime;
+            //update the bit mask column to indicate that this row is dirty
+            _bitMaskColumn[rowIndex] = 1;
+        }
 
 	    public Int32 GetValueInt32(int rowIndex, string columnName)
 	    {
