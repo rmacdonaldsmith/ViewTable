@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MacdonaldSmith.Silk.ViewTable
@@ -7,7 +8,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 	{
 		private int _rowCount = 0;
 		private int _usedRowCount = 0;
-		private byte[] _bitMaskColumn;
+		private BitArray[] _bitMaskColumn;
         private List<Type> _supportedTypes = new List<Type>
             {
                 typeof(Int16),
@@ -48,7 +49,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 		public ViewTable(int rowCount)
 		{
 			_rowCount = rowCount;
-			_bitMaskColumn = new byte[_rowCount];
+		    _bitMaskColumn = new BitArray[rowCount];
 		}
 		
 		public void Clear ()
@@ -69,8 +70,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void AddInt32Column(string columnName, Int32 defaultValue)
 	    {
-            _columnNames.Add(columnName);
-
+            var rowIndex = AddColumn(columnName);
 	        var columnValues = new int[_rowCount];
 
 	        for (int index = 0; index < columnValues.Length; index++)
@@ -78,7 +78,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 	            columnValues[index] = defaultValue;
 	        }
 
-	        _int32Values.Add(_columnNames.Count - 1, columnValues);
+	        _int32Values.Add(rowIndex, columnValues);
 	    }
 
 	    public void AddStringColumn(string columnName)
@@ -88,8 +88,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void AddStringColumn(string columnName, string defaultValue)
 	    {
-            _columnNames.Add(columnName);
-
+            var rowIndex = AddColumn(columnName);
             var columnValues = new string[_rowCount];
 
             for (int index = 0; index < columnValues.Length; index++)
@@ -97,7 +96,7 @@ namespace MacdonaldSmith.Silk.ViewTable
                 columnValues[index] = defaultValue;
             }
 
-            _stringValues.Add(_columnNames.Count - 1, columnValues);
+            _stringValues.Add(rowIndex, columnValues);
 	    }
 
         public void AddDateTimeColumn(string columnName)
@@ -107,8 +106,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
         public void AddDateTimeColumn(string columnName, DateTime defaultValue)
         {
-            _columnNames.Add(columnName);
-
+            var rowIndex = AddColumn(columnName);
             var columnValues = new DateTime[_rowCount];
 
             for (int index = 0; index < columnValues.Length; index++)
@@ -116,7 +114,7 @@ namespace MacdonaldSmith.Silk.ViewTable
                 columnValues[index] = defaultValue;
             }
 
-            _dateTimeValues.Add(_columnNames.Count - 1, columnValues);
+            _dateTimeValues.Add(rowIndex, columnValues);
         }
 
 	    public void DeleteColumn(string columnName)
@@ -138,7 +136,7 @@ namespace MacdonaldSmith.Silk.ViewTable
             _int32Values[columnIndex][rowIndex] = value;
 
             //update the bit mask column to indicate that this row is dirty
-	        _bitMaskColumn[rowIndex] = 1;
+	        _bitMaskColumn[rowIndex][columnIndex] = true;
 	    }
 
 	    public void UpdateInt32(int rowIndex, string columnName, Int32 value)
@@ -153,7 +151,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	        _int32Values[columnIndex][rowIndex] = value;
             //update the bit mask column to indicate that this row is dirty
-            _bitMaskColumn[rowIndex] = 1;
+            _bitMaskColumn[rowIndex][columnIndex] = true;
 	    }
 
 	    public void UpdateString(int rowIndex, int columnIndex, string value)
@@ -165,7 +163,7 @@ namespace MacdonaldSmith.Silk.ViewTable
             _stringValues[columnIndex][rowIndex] = value;
 
             //update the bit mask column to indicate that this row is dirty
-            _bitMaskColumn[rowIndex] = 1;
+            _bitMaskColumn[rowIndex][columnIndex] = true;
 	    }
 
         public void UpdateString(int rowIndex, string columnName, string value)
@@ -180,7 +178,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
             _stringValues[columnIndex][rowIndex] = value;
             //update the bit mask column to indicate that this row is dirty
-            _bitMaskColumn[rowIndex] = 1;
+            _bitMaskColumn[rowIndex][columnIndex] = true;
 	    }
 
 	    public void UpdateDateTime(int rowIndex, int columnIndex, DateTime dateTime)
@@ -192,7 +190,7 @@ namespace MacdonaldSmith.Silk.ViewTable
             _dateTimeValues[columnIndex][rowIndex] = dateTime;
 
             //update the bit mask column to indicate that this row is dirty
-            _bitMaskColumn[rowIndex] = 1;
+            _bitMaskColumn[rowIndex][columnIndex] = true;
 	    }
 
 	    public void UpdateDateTime(int rowIndex, string columnName, DateTime dateTime)
@@ -207,7 +205,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
             _dateTimeValues[columnIndex][rowIndex] = dateTime;
             //update the bit mask column to indicate that this row is dirty
-            _bitMaskColumn[rowIndex] = 1;
+            _bitMaskColumn[rowIndex][columnIndex] = true;
         }
 
 	    public Int32 GetValueInt32(int rowIndex, string columnName)
@@ -307,6 +305,15 @@ namespace MacdonaldSmith.Silk.ViewTable
                         columnIndex, _columnNames.Count));
             }
 	    }
+
+        private int AddColumn(string columnName)
+        {
+            var rowIndex = _columnNames.Count - 1;
+            _columnNames.Add(columnName);
+            _bitMaskColumn[rowIndex].Length += 1;
+
+            return rowIndex;
+        }
 	}
 }
 
