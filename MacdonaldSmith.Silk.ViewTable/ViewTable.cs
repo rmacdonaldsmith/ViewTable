@@ -6,9 +6,11 @@ namespace MacdonaldSmith.Silk.ViewTable
 {
 	public class ViewTable : IViewTable
 	{
+        public event EventHandler<ChangesCommittedArgs> ChangesCommittedEvent;
+
 		private int _rowCount = 0;
 		private int _usedRowCount = 0;
-		private BitArray[] _bitMaskColumn;
+		private readonly BitArray[] _bitMaskColumn;
         private List<Type> _supportedTypes = new List<Type>
             {
                 typeof(Int16),
@@ -21,17 +23,13 @@ namespace MacdonaldSmith.Silk.ViewTable
                 typeof(float),
                 typeof(bool),
             }; 
-	    //private List<ColumnBase> _columns = new List<ColumnBase>();
 
         //an array of strings that represent the column names - the ordinal
         //of the element is the column index
-	    private List<string> _columnNames = new List<string>();
+	    private readonly List<string> _columnNames = new List<string>();
 
-        //map of column index to column name
-        //private Dictionary<int, string> _columnIndexToNameMap = new Dictionary<int, string>();
-        
-        //map of column name to column index
-        //private Dictionary<string, int> _columnNameToIndexMap = new Dictionary<string, int>();
+        //readonly field that is reused for raising committed events - prevents garbage collection.
+        private readonly ChangesCommittedArgs _eventArgs = new ChangesCommittedArgs();
 
         //map column index to column values
         //since we are dealing with a limited number of data types, we will have
@@ -62,6 +60,11 @@ namespace MacdonaldSmith.Silk.ViewTable
 		        }
 		    }
 		}
+
+	    public SchemaItem[] GetSchema()
+	    {
+	        throw new NotImplementedException();
+	    }
 
 	    public void AddInt32Column(string columnName)
 	    {
@@ -254,7 +257,19 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void Commit()
 	    {
-	        throw new NotImplementedException();
+	        for (int rowIndex = 0; rowIndex < _rowCount; rowIndex++)
+	        {
+	            for (int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
+	            {
+                    _eventArgs.CommittedColumns[colIndex] = _columnNames[colIndex];
+                    _eventArgs.CommittedRows.Add(colIndex, new List<int>());
+
+                    if (_bitMaskColumn[rowIndex][colIndex] == true)
+                    {
+                        _eventArgs.CommittedRows[colIndex].Add(rowIndex);
+                    }
+	            }
+	        }
 	    }
 
 	    public void DropChanges()

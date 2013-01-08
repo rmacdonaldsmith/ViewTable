@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ChangesCommittedArgs.cs" />
     <Compile Include="IViewTable.cs" />
+    <Compile Include="SchemaItem.cs" />
     <Compile Include="ViewTable.cs" />
   </ItemGroup>
   <ItemGroup>

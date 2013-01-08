@@ -17,6 +17,8 @@ namespace MacdonaldSmith.Silk.ViewTable
 
         int ColumnCount { get; }
 
+	    SchemaItem[] GetSchema();
+
 	    void AddInt32Column(string columnName);
 	    void AddInt32Column(string columnName, Int32 defaultValue);
         void AddStringColumn(string columnName);
