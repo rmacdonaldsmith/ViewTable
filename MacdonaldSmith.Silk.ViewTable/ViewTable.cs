@@ -8,7 +8,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 	{
         public event EventHandler<ChangesCommittedArgs> ChangesCommittedEvent;
 
-		private int _rowCount = 0;
+	    private int _rowCount = 0;
 		private int _usedRowCount = 0;
 		private readonly BitArray[] _bitMaskColumn;
         private List<Type> _supportedTypes = new List<Type>
@@ -29,7 +29,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 	    private readonly List<string> _columnNames = new List<string>();
 
         //readonly field that is reused for raising committed events - prevents garbage collection.
-        private readonly ChangesCommittedArgs _eventArgs = new ChangesCommittedArgs();
+        private readonly ChangesCommittedArgs _eventArgs;
 
         //map column index to column values
         //since we are dealing with a limited number of data types, we will have
@@ -47,7 +47,14 @@ namespace MacdonaldSmith.Silk.ViewTable
 		public ViewTable(int rowCount)
 		{
 			_rowCount = rowCount;
+            _eventArgs = new ChangesCommittedArgs(rowCount);
 		    _bitMaskColumn = new BitArray[rowCount];
+            
+            //initialize the bit mask column with 0, currently we have 0 columns
+		    for (int index = 0; index < _bitMaskColumn.Length; index++)
+		    {
+		        _bitMaskColumn[index] = new BitArray(0);
+		    }
 		}
 		
 		public void Clear ()
@@ -73,7 +80,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void AddInt32Column(string columnName, Int32 defaultValue)
 	    {
-            var rowIndex = AddColumn(columnName);
+            var colIndex = AddColumn(columnName);
 	        var columnValues = new int[_rowCount];
 
 	        for (int index = 0; index < columnValues.Length; index++)
@@ -81,7 +88,8 @@ namespace MacdonaldSmith.Silk.ViewTable
 	            columnValues[index] = defaultValue;
 	        }
 
-	        _int32Values.Add(rowIndex, columnValues);
+	        _int32Values.Add(colIndex, columnValues);
+            AddColumnToBitMask();
 	    }
 
 	    public void AddStringColumn(string columnName)
@@ -91,7 +99,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void AddStringColumn(string columnName, string defaultValue)
 	    {
-            var rowIndex = AddColumn(columnName);
+            var colIndex = AddColumn(columnName);
             var columnValues = new string[_rowCount];
 
             for (int index = 0; index < columnValues.Length; index++)
@@ -99,17 +107,18 @@ namespace MacdonaldSmith.Silk.ViewTable
                 columnValues[index] = defaultValue;
             }
 
-            _stringValues.Add(rowIndex, columnValues);
+            _stringValues.Add(colIndex, columnValues);
+            AddColumnToBitMask();
 	    }
 
-        public void AddDateTimeColumn(string columnName)
+	    public void AddDateTimeColumn(string columnName)
         {
             AddDateTimeColumn(columnName, DateTime.MinValue);
         }
 
         public void AddDateTimeColumn(string columnName, DateTime defaultValue)
         {
-            var rowIndex = AddColumn(columnName);
+            var colIndex = AddColumn(columnName);
             var columnValues = new DateTime[_rowCount];
 
             for (int index = 0; index < columnValues.Length; index++)
@@ -117,7 +126,8 @@ namespace MacdonaldSmith.Silk.ViewTable
                 columnValues[index] = defaultValue;
             }
 
-            _dateTimeValues.Add(rowIndex, columnValues);
+            _dateTimeValues.Add(colIndex, columnValues);
+            AddColumnToBitMask();
         }
 
 	    public void DeleteColumn(string columnName)
@@ -257,35 +267,73 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	    public void Commit()
 	    {
-	        for (int rowIndex = 0; rowIndex < _rowCount; rowIndex++)
-	        {
-	            for (int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
-	            {
-                    _eventArgs.CommittedColumns[colIndex] = _columnNames[colIndex];
-                    _eventArgs.CommittedRows.Add(colIndex, new List<int>());
+            //reset the event args
+            _eventArgs.CommittedRows.Clear();
+            _eventArgs.CommittedColumns.Clear();
 
+            for (int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
+	        {
+                _eventArgs.CommittedColumns.Add(_columnNames[colIndex]);
+                _eventArgs.CommittedRows.Add(colIndex, new List<int>()); //this will generate garbage?
+
+                for (int rowIndex = 0; rowIndex < _usedRowCount; rowIndex++)
+	            {
                     if (_bitMaskColumn[rowIndex][colIndex] == true)
                     {
                         _eventArgs.CommittedRows[colIndex].Add(rowIndex);
                     }
 	            }
 	        }
-	    }
 
-	    public void DropChanges()
-	    {
-	        throw new NotImplementedException();
+            RaiseChangesCommittedEvent(_eventArgs);
+
+            //reset the bitmask column
+	        ResetBitMask();
 	    }
 
 	    public int RowCount 
         {
 	        get { return _rowCount; }
 	    }
-	    
-        public int ColumnCount 
+
+	    public int UsedRowCount 
+        {
+            get { return _usedRowCount; }
+	    }
+
+	    public int NewRow()
+	    {
+            if (_usedRowCount + 1 > _rowCount)
+	        {
+	            throw new InvalidOperationException(
+	                string.Format(
+	                    "Can not return the new row index because the UsedRowCount would be greater than the number of allocated rows, currently {0}.",
+	                    _rowCount));
+	        }
+
+	        return _usedRowCount++;
+	    }
+
+	    public int ColumnCount 
         {
             get { return _columnNames.Count; }
         }
+
+        protected virtual void RaiseChangesCommittedEvent(ChangesCommittedArgs e)
+        {
+            var handler = ChangesCommittedEvent;
+            if (handler != null) handler(this, e);
+        }
+
+        private void AddColumnToBitMask()
+        {
+            Array.ForEach(_bitMaskColumn, element => element.Length++);
+        }
+
+	    private void ResetBitMask()
+	    {
+            Array.ForEach(_bitMaskColumn, element => element.SetAll(false));
+	    }
 
 	    private void CheckRowIndex(int rowIndex)
 	    {
@@ -323,11 +371,8 @@ namespace MacdonaldSmith.Silk.ViewTable
 
         private int AddColumn(string columnName)
         {
-            var rowIndex = _columnNames.Count - 1;
             _columnNames.Add(columnName);
-            _bitMaskColumn[rowIndex].Length += 1;
-
-            return rowIndex;
+            return _columnNames.Count - 1;
         }
 	}
 }

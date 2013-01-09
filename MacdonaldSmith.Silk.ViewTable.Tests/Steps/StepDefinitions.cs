@@ -19,24 +19,27 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
                 var columnName = tableRow["ColumnName"];
                 var dataType = tableRow["DataType"];
                 var value = tableRow["Value"];
+                var newRowIndex = viewTable.NewRow();
 
                 switch (dataType)
                 {
                     case "string":
                         viewTable.AddStringColumn(columnName);
-                        viewTable.UpdateString(0, columnName, value);
+                        viewTable.UpdateString(newRowIndex, columnName, value);
                         break;
                     case "Int32":
                         viewTable.AddInt32Column(columnName);
-                        viewTable.UpdateInt32(0, columnName, Int32.Parse(value));
+                        viewTable.UpdateInt32(newRowIndex, columnName, Int32.Parse(value));
                         break;
                     case "DateTime":
                         viewTable.AddDateTimeColumn(columnName);
-                        viewTable.UpdateDateTime(0, columnName, DateTime.Parse(value));
+                        viewTable.UpdateDateTime(newRowIndex, columnName, DateTime.Parse(value));
                         break;
                 }
             }
 
+            viewTable.Commit(); //commit so that we flush the inital state (we will ignore the event) and can then test the update
+            
             ScenarioContext.Current.Set(viewTable, "viewtable");
         }
 
@@ -66,13 +69,15 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
         {
             var viewTable = ScenarioContext.Current.Get<ViewTable>("viewtable");
 
+            viewTable.ChangesCommittedEvent += (sender, args) => ScenarioContext.Current.Set(args, "committedevent");
             viewTable.Commit();
         }
 
         [Then(@"I receive an event with the changes")]
         public void ThenIReceiveAnEventWithTheChanges()
         {
-            ScenarioContext.Current.Pending();
+            var changesCommittedArgs = ScenarioContext.Current.Get<ChangesCommittedArgs>("committedevent");
+
         }
     }
 }

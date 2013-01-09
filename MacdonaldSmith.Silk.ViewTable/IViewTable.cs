@@ -3,20 +3,55 @@ namespace MacdonaldSmith.Silk.ViewTable
 {
 	public interface IViewTable
 	{
+        /// <summary>
+        /// Resets all the values to the default value defined for the column
+        /// </summary>
 		void Clear();
 
+        /// <summary>
+        /// Deletes the specified column from the table
+        /// </summary>
+        /// <param name="columnName"></param>
         void DeleteColumn(string columnName);
 
+        /// <summary>
+        /// Resize the number of allocated rows in the table
+        /// </summary>
+        /// <param name="rowCount"></param>
         void ReSize(int rowCount);
 
+        /// <summary>
+        /// Raises the ChangesCommitted event and resets the
+        /// tracking of cell changes
+        /// </summary>
         void Commit();
 
-        void DropChanges();
-
+        /// <summary>
+        /// Returns the total allocated row count
+        /// </summary>
         int RowCount { get; }
 
-        int ColumnCount { get; }
+        /// <summary>
+        /// Returns the number of rows that have actually been used
+        /// </summary>
+        int UsedRowCount { get; }
 
+        /// <summary>
+        /// Returns the index of the next unused row
+        /// </summary>
+        /// <returns></returns>
+	    int NewRow();
+
+        /// <summary>
+        /// Returns a count of the number of columns in the table
+        /// </summary>
+	    int ColumnCount { get; }
+
+        /// <summary>
+        /// Returns a collection that describes each column in the table.
+        /// Primarily used when remoting the table.
+        /// </summary>
+        /// <returns></returns>
 	    SchemaItem[] GetSchema();
 
 	    void AddInt32Column(string columnName);
