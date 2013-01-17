@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
+using NUnit.Framework;
 
 namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
 {
@@ -13,13 +14,13 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
         public void GivenIHaveATableWithTheFollowingInitialState(Table table)
         {
             var viewTable = new ViewTable(100);
-
+			var newRowIndex = viewTable.NewRow();
+			
             foreach (TableRow tableRow in table.Rows)
             {
                 var columnName = tableRow["ColumnName"];
                 var dataType = tableRow["DataType"];
                 var value = tableRow["Value"];
-                var newRowIndex = viewTable.NewRow();
 
                 switch (dataType)
                 {
@@ -77,7 +78,10 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
         public void ThenIReceiveAnEventWithTheChanges()
         {
             var changesCommittedArgs = ScenarioContext.Current.Get<ChangesCommittedArgs>("committedevent");
-
+			
+			Assert.IsNotNull(changesCommittedArgs);
+			Assert.AreEqual(1, changesCommittedArgs.CommittedColumnChanges.Count);
+			Assert.AreEqual(1, changesCommittedArgs.CommittedColumnChanges[0].Count);
         }
     }
 }

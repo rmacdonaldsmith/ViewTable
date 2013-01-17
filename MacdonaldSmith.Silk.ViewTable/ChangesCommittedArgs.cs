@@ -6,30 +6,25 @@ namespace MacdonaldSmith.Silk.ViewTable
     public class ChangesCommittedArgs : EventArgs
     {
         private readonly List<int> _committedColumnIndexes;
-        private readonly List<string> _committedColumns;
+        private readonly List<string> _columnsWithCommits;
         private IDictionary<int, List<int>> _committedRows;
 
-        public List<int> CommittedColumnIndexes
+        public List<string> ColumnsWithCommits
         {
-            get { return _committedColumnIndexes; }
+            get { return _columnsWithCommits; }
         }
 
-        public List<string> CommittedColumns
-        {
-            get { return _committedColumns; }
-        }
-
-        public IDictionary<int, List<int>> CommittedRows
+        public IDictionary<int, List<int>> CommittedColumnChanges
         {
             get { return _committedRows; }
             set { _committedRows = value; }
         }
 
-        public ChangesCommittedArgs(int rowCount)
+        public ChangesCommittedArgs()
         {
             _committedColumnIndexes = new List<int>();
-            _committedColumns = new List<string>();
-            _committedRows = new Dictionary<int, List<int>>(rowCount);
+            _columnsWithCommits = new List<string>();
+            _committedRows = new Dictionary<int, List<int>>();
         }
     }
 }

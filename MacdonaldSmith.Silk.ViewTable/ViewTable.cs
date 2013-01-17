@@ -47,7 +47,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 		public ViewTable(int rowCount)
 		{
 			_rowCount = rowCount;
-            _eventArgs = new ChangesCommittedArgs(rowCount);
+            _eventArgs = new ChangesCommittedArgs();
 		    _bitMaskColumn = new BitArray[rowCount];
             
             //initialize the bit mask column with 0, currently we have 0 columns
@@ -268,19 +268,19 @@ namespace MacdonaldSmith.Silk.ViewTable
 	    public void Commit()
 	    {
             //reset the event args
-            _eventArgs.CommittedRows.Clear();
-            _eventArgs.CommittedColumns.Clear();
+            _eventArgs.CommittedColumnChanges.Clear();
+            _eventArgs.ColumnsWithCommits.Clear();
 
             for (int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
 	        {
-                _eventArgs.CommittedColumns.Add(_columnNames[colIndex]);
-                _eventArgs.CommittedRows.Add(colIndex, new List<int>()); //this will generate garbage?
+                _eventArgs.ColumnsWithCommits.Add(_columnNames[colIndex]);
+                _eventArgs.CommittedColumnChanges.Add(colIndex, new List<int>()); //this will generate garbage?
 
                 for (int rowIndex = 0; rowIndex < _usedRowCount; rowIndex++)
 	            {
                     if (_bitMaskColumn[rowIndex][colIndex] == true)
                     {
-                        _eventArgs.CommittedRows[colIndex].Add(rowIndex);
+                        _eventArgs.CommittedColumnChanges[colIndex].Add(rowIndex);
                     }
 	            }
 	        }
