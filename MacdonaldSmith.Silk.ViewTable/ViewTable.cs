@@ -29,6 +29,7 @@ namespace MacdonaldSmith.Silk.ViewTable
 	    private readonly List<string> _columnNames = new List<string>();
 
         //readonly field that is reused for raising committed events - prevents garbage collection.
+		//maybe we can use some callback Func or Expression<Func<>> instead of an event like this?
         private readonly ChangesCommittedArgs _eventArgs;
 
         //map column index to column values
@@ -273,13 +274,15 @@ namespace MacdonaldSmith.Silk.ViewTable
 
             for (int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
 	        {
-                _eventArgs.ColumnsWithCommits.Add(_columnNames[colIndex]);
-                _eventArgs.CommittedColumnChanges.Add(colIndex, new List<int>()); //this will generate garbage?
-
                 for (int rowIndex = 0; rowIndex < _usedRowCount; rowIndex++)
 	            {
                     if (_bitMaskColumn[rowIndex][colIndex] == true)
                     {
+						if(!_eventArgs.ColumnsWithCommits.Contains(_columnNames[colIndex]))
+						{
+							_eventArgs.ColumnsWithCommits.Add(_columnNames[colIndex]);
+                			_eventArgs.CommittedColumnChanges.Add(colIndex, new List<int>()); //this will generate garbage?
+						}
                         _eventArgs.CommittedColumnChanges[colIndex].Add(rowIndex);
                     }
 	            }
@@ -313,7 +316,17 @@ namespace MacdonaldSmith.Silk.ViewTable
 
 	        return _usedRowCount++;
 	    }
-
+		
+		public void DeleteRow(int rowIndex)
+		{
+			CheckRowIndex(rowIndex);
+			
+			for(int colIndex = 0; colIndex < _columnNames.Count; colIndex++)
+			{
+				Array.Clear(_stringValues[colIndex], rowIndex, 1);
+			}
+		}
+		
 	    public int ColumnCount 
         {
             get { return _columnNames.Count; }

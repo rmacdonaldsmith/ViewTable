@@ -2,10 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MacdonaldSmith.Silk.ViewTable/ViewTable.cs">
     <Files>
-      <File FileName="MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs" Line="20" Column="14" />
-      <File FileName="MacdonaldSmith.Silk.ViewTable/ViewTable.cs" Line="281" Column="68" />
-      <File FileName="MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature" Line="13" Column="1" />
+      <File FileName="MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs" Line="85" Column="10" />
+      <File FileName="MacdonaldSmith.Silk.ViewTable/ViewTable.cs" Line="326" Column="55" />
+      <File FileName="MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature" Line="34" Column="61" />
       <File FileName="MacdonaldSmith.Silk.ViewTable/ChangesCommittedArgs.cs" Line="27" Column="61" />
+      <File FileName="MacdonaldSmith.Silk.ViewTable/IViewTable.cs" Line="47" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,6 +26,7 @@
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
           <Value>this.UsedRowCount</Value>
+          <Value>this._eventArgs.CommittedColumnChanges</Value>
         </State>
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
@@ -48,9 +50,10 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable/ViewTable.cs" line="274" />
       <Breakpoint file="/home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs" line="80" />
       <Breakpoint file="/home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs" line="17" />
+      <Breakpoint file="/home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs" line="65" />
+      <Breakpoint file="/home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable/ViewTable.cs" line="275" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

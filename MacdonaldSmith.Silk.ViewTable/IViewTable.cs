@@ -41,7 +41,11 @@ namespace MacdonaldSmith.Silk.ViewTable
         /// </summary>
         /// <returns></returns>
 	    int NewRow();
-
+		
+		// Clears the values in the rowIndex indicated, reduces the
+		// used row count by 1
+		void DeleteRow(int rowIndex);
+		
         /// <summary>
         /// Returns a count of the number of columns in the table
         /// </summary>
