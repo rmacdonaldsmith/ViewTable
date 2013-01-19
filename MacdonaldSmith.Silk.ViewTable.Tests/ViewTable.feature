@@ -14,12 +14,13 @@ Scenario: Update
 	Then I receive an event with the changes
 
 Scenario: Add Row
-	Given I have a table with the followinf initial state
+	Given I have a table with the following initial state
 		| ColumnName        | DataType | Value      |
 		| Name              | string   | Robert     |
 		| Number of Records | Int32    | 12         |
 		| DoB               | DateTime | 03/05/1973 |
-	When I add a new row
+	When I add a new row with the following values
+		| David | 45 | 06/09/1987 |
 	And I commit the changes
 	Then I receive an event with the new row
 	

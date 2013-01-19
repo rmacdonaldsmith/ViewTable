@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <TestRecord Name="MacdonaldSmith">
+      <Tests>
+        <TestRecord Name="Silk">
+          <Tests>
+            <TestRecord Name="ViewTable">
+              <Tests>
+                <TestRecord Name="Tests">
+                  <Tests>
+                    <TestRecord Name="ViewTableFeature">
+                      <Results>
+                        <UnitTestResult>
+                          <TestDate>2013-01-19T07:22:30</TestDate>
+                          <Status>Success</Status>
+                          <TotalFailures>0</TotalFailures>
+                          <TotalSuccess>2</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Test successful
+
+Execution time: 0.24ms</Message>
+                        </UnitTestResult>
+                      </Results>
+                      <Tests>
+                        <TestRecord Name="Update">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-01-19T07:22:30</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.16ms</Message>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I update the column "Name" with the value "John"
+-&gt; done: StepDefinitions.WhenIUpdateTheColumnWithTheValue("Name", "John") (0.0s)
+And I commit the changes
+-&gt; done: StepDefinitions.WhenICommitTheChanges() (0.0s)
+Then I receive an event with the changes
+-&gt; done: StepDefinitions.ThenIReceiveAnEventWithTheChanges() (0.0s)
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                      </Tests>
+                    </TestRecord>
+                  </Tests>
+                </TestRecord>
+              </Tests>
+            </TestRecord>
+          </Tests>
+        </TestRecord>
+      </Tests>
+    </TestRecord>
+  </Tests>
+</TestRecord>

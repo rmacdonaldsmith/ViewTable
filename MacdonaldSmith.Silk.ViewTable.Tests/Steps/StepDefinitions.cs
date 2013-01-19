@@ -44,19 +44,6 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
             ScenarioContext.Current.Set(viewTable, "viewtable");
         }
 
-        [Given(@"I the table contains the following initial state")]
-        public void GivenITheTableContainsTheFollowingInitialState(Table table)
-        {
-            var viewTable = ScenarioContext.Current.Get<ViewTable>("viewtable");
-
-            foreach (var tableRow in table.Rows)
-            {
-                
-            }
-
-            ScenarioContext.Current.Set(viewTable, "viewtable");
-        }
-
         [When(@"I update the column ""(.*)"" with the value ""(.*)""")]
         public void WhenIUpdateTheColumnWithTheValue(string columnName, string value)
         {
@@ -83,5 +70,11 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
 			Assert.AreEqual(1, changesCommittedArgs.CommittedColumnChanges.Count);
 			Assert.AreEqual(1, changesCommittedArgs.CommittedColumnChanges[0].Count);
         }
+		
+		[When(@"I add a new row with the folowing values")]
+		public void WhenIAddANewRowWithTheFollowingValues()
+		{
+			
+		}
     }
 }
