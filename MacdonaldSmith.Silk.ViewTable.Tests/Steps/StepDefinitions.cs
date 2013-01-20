@@ -74,7 +74,51 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
 		[When(@"I add a new row with the folowing values")]
 		public void WhenIAddANewRowWithTheFollowingValues()
 		{
-			
+			Assert.Inconclusive("Test not implmented.");
 		}
+		
+		[When(@"I add a ""(.*)"" column with the name ""(.*)""")]
+        public void WhenIAddAColumnWithTheName(string columnType, string columnName)
+        {
+			var viewTable = ScenarioContext.Current.Get<ViewTable>("viewtable");
+			
+			switch (columnType)
+			{
+				case "string":
+				{
+					viewTable.AddStringColumn(columnName);
+					break;
+				}
+				case "int32":
+				{
+					viewTable.AddInt32Column(columnName);
+					break;
+				}
+				case "datetime":
+				{
+					viewTable.AddDateTimeColumn(columnName);
+					break;
+				}
+				default:
+				{
+					Assert.Fail(
+						string.Format ("Column of type '{0}' not suported by the test.", 
+					    	columnType));
+					break;
+				}
+			}
+        }
+		
+        [Then(@"the table schema will change to reflect the new ""(.*)"" column called ""(.*)""")]
+        public void ThenTheTableSchemaWillChangeToReflectTheNewColumnCalled(string columnType, string columnName)
+        {
+			var viewTable = ScenarioContext.Current.Get<ViewTable>("viewtable");
+			
+			var schema = viewTable.GetSchema();
+			
+			Assert.AreEqual(1, 
+				schema.Count(schemaItem => schemaItem.ColumnName == columnName && 
+			             schemaItem.ColumnType == columnType));
+        }
     }
 }

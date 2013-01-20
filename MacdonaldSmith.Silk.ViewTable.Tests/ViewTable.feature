@@ -24,7 +24,16 @@ Scenario: Add Row
 	And I commit the changes
 	Then I receive an event with the new row
 	
-Scenario Delete Row
+Scenario: Add Column
+	Given I have a table with the following initial state
+		| ColumnName        | DataType | Value      |
+		| Name              | string   | Robert     |
+		| Number of Records | Int32    | 12         |
+		| DoB               | DateTime | 03/05/1973 |
+	When I add a "string" column with the name "Surname"
+	Then the table schema will change to reflect the new "string" column called "Surname"
+	
+Scenario: Delete Row
 	Given I have a table with the following initial state
 		| ColumnName        | DataType | Value      |
 		| Name              | string   | Robert     |
