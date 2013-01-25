@@ -27,7 +27,7 @@ namespace MacdonaldSmith.Silk.ViewTable
         //an array of strings that represent the column names - the ordinal
         //of the element is the column index
 	    private readonly List<string> _columnNames = new List<string>();
-
+		
         //readonly field that is reused for raising committed events - prevents garbage collection.
 		//maybe we can use some callback Func or Expression<Func<>> instead of an event like this?
         private readonly ChangesCommittedArgs _eventArgs;
@@ -69,72 +69,55 @@ namespace MacdonaldSmith.Silk.ViewTable
 		    }
 		}
 
-	    public SchemaItem[] GetSchema()
+	    public string[] GetSchema()
 	    {
-	        throw new NotImplementedException();
+	        return _columnNames.ToArray();
 	    }
-
-	    public void AddInt32Column(string columnName)
-	    {
-	        AddInt32Column(columnName, 0);
-	    }
-
-	    public void AddInt32Column(string columnName, Int32 defaultValue)
+		
+		public void AddInt16Column(string columnName)
 	    {
             var colIndex = AddColumn(columnName);
 	        var columnValues = new int[_rowCount];
 
-	        for (int index = 0; index < columnValues.Length; index++)
-	        {
-	            columnValues[index] = defaultValue;
-	        }
+	        _int16Values.Add(colIndex, columnValues);
+            AddColumnToBitMask();
+	    }
+		
+	    public void AddInt32Column(string columnName)
+	    {
+            var colIndex = AddColumn(columnName);
+	        var columnValues = new int[_rowCount];
 
 	        _int32Values.Add(colIndex, columnValues);
             AddColumnToBitMask();
 	    }
-
-	    public void AddStringColumn(string columnName)
+		
+		public void AddInt64Column(string columnName)
 	    {
-	        AddStringColumn(columnName, string.Empty);
-	    }
+            var colIndex = AddColumn(columnName);
+	        var columnValues = new int[_rowCount];
 
-	    public void AddStringColumn(string columnName, string defaultValue)
+	        _int64Values.Add(colIndex, columnValues);
+            AddColumnToBitMask();
+	    }
+		
+	    public void AddStringColumn(string columnName)
 	    {
             var colIndex = AddColumn(columnName);
             var columnValues = new string[_rowCount];
-
-            for (int index = 0; index < columnValues.Length; index++)
-            {
-                columnValues[index] = defaultValue;
-            }
 
             _stringValues.Add(colIndex, columnValues);
             AddColumnToBitMask();
 	    }
 
-	    public void AddDateTimeColumn(string columnName)
-        {
-            AddDateTimeColumn(columnName, DateTime.MinValue);
-        }
-
-        public void AddDateTimeColumn(string columnName, DateTime defaultValue)
+        public void AddDateTimeColumn(string columnName)
         {
             var colIndex = AddColumn(columnName);
             var columnValues = new DateTime[_rowCount];
 
-            for (int index = 0; index < columnValues.Length; index++)
-            {
-                columnValues[index] = defaultValue;
-            }
-
             _dateTimeValues.Add(colIndex, columnValues);
             AddColumnToBitMask();
         }
-
-	    public void DeleteColumn(string columnName)
-	    {
-	        throw new NotImplementedException();
-	    }
 
 	    public void ReSize(int rowCount)
 	    {

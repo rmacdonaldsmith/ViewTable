@@ -9,12 +9,6 @@ namespace MacdonaldSmith.Silk.ViewTable
 		void Clear();
 
         /// <summary>
-        /// Deletes the specified column from the table
-        /// </summary>
-        /// <param name="columnName"></param>
-        void DeleteColumn(string columnName);
-
-        /// <summary>
         /// Resize the number of allocated rows in the table
         /// </summary>
         /// <param name="rowCount"></param>
@@ -56,26 +50,50 @@ namespace MacdonaldSmith.Silk.ViewTable
         /// Primarily used when remoting the table.
         /// </summary>
         /// <returns></returns>
-	    SchemaItem[] GetSchema();
+	    string[] GetSchema();
 
+		void AddInt16Column(string columnName);
 	    void AddInt32Column(string columnName);
-	    void AddInt32Column(string columnName, Int32 defaultValue);
+		void AddInt64Column(string columnName);
         void AddStringColumn(string columnName);
-        void AddStringColumn(string columnName, String defaultValue);
         void AddDateTimeColumn(string columnName);
-        void AddDateTimeColumn(string columnName, DateTime defaultValue);
-
+		void AddDecimalColumn(string columnName);
+		void AddFloatColumn(string columnName);
+		void AddBooleanColumn(string columnName);
+		
+		void UpdateInt16 (int rowIndex, int columnIndex, Int16 value);
+        void UpdateInt16(int rowIndex, string columnName, Int16 value);
 		void UpdateInt32 (int rowIndex, int columnIndex, Int32 value);
         void UpdateInt32(int rowIndex, string columnName, Int32 value);
+		void UpdateInt64 (int rowIndex, int columnIndex, Int64 value);
+        void UpdateInt64(int rowIndex, string columnName, Int64 value);
         void UpdateString(int rowIndex, int columnIndex, string value);
         void UpdateString(int rowIndex, string columnName, string value);
         void UpdateDateTime(int rowIndex, int columnIndex, DateTime dateTime);
         void UpdateDateTime(int rowIndex, string columnName, DateTime dateTime);
-
+		void UpdateDecimal(int rowIndex, int columnIndex, Decimal value);
+		void UpdateDecimal(int rowIndex, string columnName, Decimal value);
+		void UpdateFloat(int rowIndex, int columnIndex, float value);
+		void UpdateFloat(int rowIndex, string columnName, float value);
+		void UpdateBoolean(int rowIndex, int columnIndex, bool value);
+		void UpdateBoolean(int rowIndex, string columnName, bool value);
+		
+		Int16 GetValueInt16(int rowIndex, string columnName);
+        Int16 GetValueInt16(int rowIndex, int columnIndex);
         Int32 GetValueInt32(int rowIndex, string columnName);
         Int32 GetValueInt32(int rowIndex, int columnIndex);
+		Int64 GetValueInt64(int rowIndex, string columnName);
+        Int64 GetValueInt64(int rowIndex, int columnIndex);
         string GetValueString(int rowIndex, string columnName);
         string GetValueString(int rowIndex, int columnIndex);
+		DateTime GetValueDateTime(int rowIndex, int columnIndex);
+		DateTime GetValueDateTime(int rowIndex, string columnName);
+		Decimal GetValueDecimal(int rowIndex, int columnIndex);
+		Decimal GetValueDecimal(int rowIndex, string columnName);
+		float GetValueFloat(int rowIndex, int columnIndex);
+		float GetValueFloat(int rowIndex, string columnName);
+		bool GetValueBoolean(int rowIndex, int columnIndex);
+		bool GetValueBoolean(int rowIndex, string columnName);
 	}
 }
 

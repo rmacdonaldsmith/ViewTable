@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <TestRecord Name="MacdonaldSmith">
+      <Tests>
+        <TestRecord Name="Silk">
+          <Tests>
+            <TestRecord Name="ViewTable">
+              <Tests>
+                <TestRecord Name="Tests">
+                  <Tests>
+                    <TestRecord Name="ViewTableFeature">
+                      <Results>
+                        <UnitTestResult>
+                          <TestDate>2013-01-25T06:17:36</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>2</TotalFailures>
+                          <TotalSuccess>3</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2013-01-25T06:28:49</TestDate>
+                          <Status>Success</Status>
+                          <TotalFailures>0</TotalFailures>
+                          <TotalSuccess>5</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Test successful
+
+Execution time: 0.49ms</Message>
+                        </UnitTestResult>
+                      </Results>
+                      <Tests>
+                        <TestRecord Name="AddColumn">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:17:36</TestDate>
+                              <Status>Failure</Status>
+                              <TotalFailures>1</TotalFailures>
+                              <TotalSuccess>0</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>System.NotImplementedException : The requested feature is not implemented.</Message>
+                              <StackTrace>  at MacdonaldSmith.Silk.ViewTable.Tests.Steps.StepDefinitions.ThenTheTableSchemaWillChangeToReflectTheNewColumnCalled (System.String columnType, System.String columnName) [0x00014] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/Steps/StepDefinitions.cs:115 
+  at (wrapper dynamic-method) object:lambda_method (System.Runtime.CompilerServices.Closure,TechTalk.SpecFlow.Infrastructure.IContextManager,string,string)
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] in &lt;filename unknown&gt;:0 </StackTrace>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I add a "string" column with the name "Surname"
+-&gt; done: StepDefinitions.WhenIAddAColumnWithTheName("string", "Surname") (0.0s)
+Then the table schema will change to reflect the new "string" column called "Surname"
+-&gt; error: The requested feature is not implemented.
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:28:45</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.18ms</Message>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I add a "string" column with the name "Surname"
+-&gt; done: StepDefinitions.WhenIAddAColumnWithTheName("string", "Surname") (0.0s)
+Then the table schema will change to reflect the new "string" column called "Surname"
+-&gt; done: StepDefinitions.ThenTheTableSchemaWillChangeToReflectTheNewColumnCalled("string", "Surname") (0.0s)
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:28:49</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.18ms</Message>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I add a "string" column with the name "Surname"
+-&gt; done: StepDefinitions.WhenIAddAColumnWithTheName("string", "Surname") (0.0s)
+Then the table schema will change to reflect the new "string" column called "Surname"
+-&gt; done: StepDefinitions.ThenTheTableSchemaWillChangeToReflectTheNewColumnCalled("string", "Surname") (0.0s)
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                        <TestRecord Name="AddRow">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:17:36</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>No matching step definition found for one or more steps.
+using System;
+using TechTalk.SpecFlow;
+
+namespace MyNamespace
+{
+    [Binding]
+    public class StepDefinitions
+    {
+        [When(@"I add a new row with the following values")]
+        public void WhenIAddANewRowWithTheFollowingValues(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+        
+        [Then(@"I receive an event with the new row")]
+        public void ThenIReceiveAnEventWithTheNewRow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+    }
+}
+</Message>
+                              <StackTrace>at NUnit.Framework.Assert.Inconclusive (string,object[]) &lt;IL 0x00037, 0x0009b&gt;
+at (wrapper dynamic-method) object.lambda_method (System.Runtime.CompilerServices.Closure,string,object[]) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestInconclusive (string) &lt;IL 0x00058, 0x000e0&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestPending (string) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.ErrorHandling.ErrorProvider.ThrowPendingError (TechTalk.SpecFlow.Infrastructure.TestStatus,string) &lt;IL 0x00027, 0x00046&gt;
+at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep () &lt;IL 0x001ab, 0x003b6&gt;
+at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors () &lt;IL 0x00006, 0x00019&gt;
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.ScenarioCleanup () [0x00000] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:35
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.AddRow () [0x00109] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:27
+at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;) &lt;0x00003&gt;
+at System.Reflection.MonoMethod.Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo) &lt;IL 0x000db, 0x0013f&gt;
+</StackTrace>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I add a new row with the following values
+  --- table step argument ---
+  | David | 45 | 06/09/1987 |
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [When(@"I add a new row with the following values")]
+        public void WhenIAddANewRowWithTheFollowingValues(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+And I commit the changes
+-&gt; skipped because of previous errors
+Then I receive an event with the new row
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [Then(@"I receive an event with the new row")]
+        public void ThenIReceiveAnEventWithTheNewRow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:28:49</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>No matching step definition found for one or more steps.
+using System;
+using TechTalk.SpecFlow;
+
+namespace MyNamespace
+{
+    [Binding]
+    public class StepDefinitions
+    {
+        [When(@"I add a new row with the following values")]
+        public void WhenIAddANewRowWithTheFollowingValues(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+        
+        [Then(@"I receive an event with the new row")]
+        public void ThenIReceiveAnEventWithTheNewRow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+    }
+}
+</Message>
+                              <StackTrace>at NUnit.Framework.Assert.Inconclusive (string,object[]) &lt;IL 0x00037, 0x0009b&gt;
+at (wrapper dynamic-method) object.lambda_method (System.Runtime.CompilerServices.Closure,string,object[]) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestInconclusive (string) &lt;IL 0x00058, 0x000e0&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestPending (string) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.ErrorHandling.ErrorProvider.ThrowPendingError (TechTalk.SpecFlow.Infrastructure.TestStatus,string) &lt;IL 0x00027, 0x00046&gt;
+at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep () &lt;IL 0x001ab, 0x003b6&gt;
+at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors () &lt;IL 0x00006, 0x00019&gt;
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.ScenarioCleanup () [0x00000] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:35
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.AddRow () [0x00109] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:27
+at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;) &lt;0x00003&gt;
+at System.Reflection.MonoMethod.Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo) &lt;IL 0x000db, 0x0013f&gt;
+</StackTrace>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I add a new row with the following values
+  --- table step argument ---
+  | David | 45 | 06/09/1987 |
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [When(@"I add a new row with the following values")]
+        public void WhenIAddANewRowWithTheFollowingValues(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+And I commit the changes
+-&gt; skipped because of previous errors
+Then I receive an event with the new row
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [Then(@"I receive an event with the new row")]
+        public void ThenIReceiveAnEventWithTheNewRow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                        <TestRecord Name="DeleteRow">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:17:36</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>No matching step definition found for one or more steps.
+using System;
+using TechTalk.SpecFlow;
+
+namespace MyNamespace
+{
+    [Binding]
+    public class StepDefinitions
+    {
+        [When(@"I delete a row")]
+        public void WhenIDeleteARow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+        
+        [Then(@"I receive an event indicating the row has been deleted")]
+        public void ThenIReceiveAnEventIndicatingTheRowHasBeenDeleted()
+        {
+            ScenarioContext.Current.Pending();
+        }
+    }
+}
+</Message>
+                              <StackTrace>at NUnit.Framework.Assert.Inconclusive (string,object[]) &lt;IL 0x00037, 0x0009b&gt;
+at (wrapper dynamic-method) object.lambda_method (System.Runtime.CompilerServices.Closure,string,object[]) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestInconclusive (string) &lt;IL 0x00058, 0x000e0&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestPending (string) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.ErrorHandling.ErrorProvider.ThrowPendingError (TechTalk.SpecFlow.Infrastructure.TestStatus,string) &lt;IL 0x00027, 0x00046&gt;
+at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep () &lt;IL 0x001ab, 0x003b6&gt;
+at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors () &lt;IL 0x00006, 0x00019&gt;
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.ScenarioCleanup () [0x00000] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:35
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.DeleteRow () [0x000e2] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:46
+at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;) &lt;0x00003&gt;
+at System.Reflection.MonoMethod.Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo) &lt;IL 0x000db, 0x0013f&gt;
+</StackTrace>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I delete a row
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [When(@"I delete a row")]
+        public void WhenIDeleteARow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+And I commit the changes
+-&gt; skipped because of previous errors
+Then I receive an event indicating the row has been deleted
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [Then(@"I receive an event indicating the row has been deleted")]
+        public void ThenIReceiveAnEventIndicatingTheRowHasBeenDeleted()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:28:49</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>No matching step definition found for one or more steps.
+using System;
+using TechTalk.SpecFlow;
+
+namespace MyNamespace
+{
+    [Binding]
+    public class StepDefinitions
+    {
+        [When(@"I delete a row")]
+        public void WhenIDeleteARow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+        
+        [Then(@"I receive an event indicating the row has been deleted")]
+        public void ThenIReceiveAnEventIndicatingTheRowHasBeenDeleted()
+        {
+            ScenarioContext.Current.Pending();
+        }
+    }
+}
+</Message>
+                              <StackTrace>at NUnit.Framework.Assert.Inconclusive (string,object[]) &lt;IL 0x00037, 0x0009b&gt;
+at (wrapper dynamic-method) object.lambda_method (System.Runtime.CompilerServices.Closure,string,object[]) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestInconclusive (string) &lt;IL 0x00058, 0x000e0&gt;
+at TechTalk.SpecFlow.UnitTestProvider.NUnitRuntimeProvider.TestPending (string) &lt;IL 0x00002, 0x00013&gt;
+at TechTalk.SpecFlow.ErrorHandling.ErrorProvider.ThrowPendingError (TechTalk.SpecFlow.Infrastructure.TestStatus,string) &lt;IL 0x00027, 0x00046&gt;
+at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnAfterLastStep () &lt;IL 0x001ab, 0x003b6&gt;
+at TechTalk.SpecFlow.TestRunner.CollectScenarioErrors () &lt;IL 0x00006, 0x00019&gt;
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.ScenarioCleanup () [0x00000] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:35
+at MacdonaldSmith.Silk.ViewTable.Tests.ViewTableFeature.DeleteRow () [0x000e2] in /home/robert/Programming/Silk/ViewTable/MacdonaldSmith.Silk.ViewTable.Tests/ViewTable.feature:46
+at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;) &lt;0x00003&gt;
+at System.Reflection.MonoMethod.Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo) &lt;IL 0x000db, 0x0013f&gt;
+</StackTrace>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I delete a row
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [When(@"I delete a row")]
+        public void WhenIDeleteARow()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+And I commit the changes
+-&gt; skipped because of previous errors
+Then I receive an event indicating the row has been deleted
+-&gt; No matching step definition found for the step. Use the following code to create one:
+        [Then(@"I receive an event indicating the row has been deleted")]
+        public void ThenIReceiveAnEventIndicatingTheRowHasBeenDeleted()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                        <TestRecord Name="Update">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:17:36</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.04ms</Message>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I update the column "Name" with the value "John"
+-&gt; done: StepDefinitions.WhenIUpdateTheColumnWithTheValue("Name", "John") (0.0s)
+And I commit the changes
+-&gt; done: StepDefinitions.WhenICommitTheChanges() (0.0s)
+Then I receive an event with the changes
+-&gt; done: StepDefinitions.ThenIReceiveAnEventWithTheChanges() (0.0s)
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2013-01-25T06:28:49</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.02ms</Message>
+                              <ConsoleOutput>Given I have a table with the following initial state
+  --- table step argument ---
+  | ColumnName        | DataType | Value      |
+  | Name              | string   | Robert     |
+  | Number of Records | Int32    | 12         |
+  | DoB               | DateTime | 03/05/1973 |
+-&gt; done: StepDefinitions.GivenIHaveATableWithTheFollowingInitialState(&lt;table&gt;) (0.0s)
+When I update the column "Name" with the value "John"
+-&gt; done: StepDefinitions.WhenIUpdateTheColumnWithTheValue("Name", "John") (0.0s)
+And I commit the changes
+-&gt; done: StepDefinitions.WhenICommitTheChanges() (0.0s)
+Then I receive an event with the changes
+-&gt; done: StepDefinitions.ThenIReceiveAnEventWithTheChanges() (0.0s)
+</ConsoleOutput>
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                      </Tests>
+                    </TestRecord>
+                  </Tests>
+                </TestRecord>
+              </Tests>
+            </TestRecord>
+          </Tests>
+        </TestRecord>
+      </Tests>
+    </TestRecord>
+  </Tests>
+</TestRecord>

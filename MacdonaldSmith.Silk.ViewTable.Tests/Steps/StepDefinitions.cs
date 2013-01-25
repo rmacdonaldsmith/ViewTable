@@ -117,8 +117,7 @@ namespace MacdonaldSmith.Silk.ViewTable.Tests.Steps
 			var schema = viewTable.GetSchema();
 			
 			Assert.AreEqual(1, 
-				schema.Count(schemaItem => schemaItem.ColumnName == columnName && 
-			             schemaItem.ColumnType == columnType));
+				schema.Count(schemaItem => schemaItem == columnName));
         }
     }
 }
